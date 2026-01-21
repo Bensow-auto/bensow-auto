@@ -1,19 +1,19 @@
 export const tokens = {
   colors: {
     primary: {
-      DEFAULT: "#D4AF37",
-      light: "#E5C76B",
-      dark: "#B8962E",
+      DEFAULT: "#FFFFFF",
+      light: "#F5F5F5",
+      dark: "#E5E5E5",
     },
     secondary: {
-      DEFAULT: "#1A1A2E",
-      light: "#2D2D44",
-      dark: "#0F0F1A",
+      DEFAULT: "#0B0F19",
+      light: "#141B2D",
+      dark: "#060A12",
     },
     accent: {
-      DEFAULT: "#C9A227",
-      light: "#DDB84A",
-      dark: "#A6851F",
+      DEFAULT: "#22C55E",
+      light: "#4ADE80",
+      dark: "#16A34A",
     },
     neutral: {
       white: "#FFFFFF",
