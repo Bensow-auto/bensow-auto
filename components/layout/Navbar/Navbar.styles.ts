@@ -1,0 +1,15 @@
+export const navbarStyles = {
+  wrapper: "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+  wrapperScrolled: "bg-secondary/80 backdrop-blur-md border-b border-gray-800",
+  wrapperTop: "bg-transparent",
+  container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+  inner: "flex items-center justify-between h-20",
+  logo: "text-2xl font-bold text-white",
+  nav: "hidden lg:flex items-center gap-8",
+  navLink: "text-gray-300 hover:text-white transition-colors duration-200 text-sm",
+  navLinkActive: "text-white",
+  mobileMenuButton: "lg:hidden p-2 text-white",
+  mobileMenu: "lg:hidden absolute top-full left-0 right-0 bg-secondary-light border-b border-gray-800",
+  mobileNav: "flex flex-col p-4 gap-4",
+  mobileNavLink: "text-gray-300 hover:text-white transition-colors duration-200 py-2",
+} as const
