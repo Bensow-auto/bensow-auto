@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+echo "Running checks before push..."
+
+echo "Running Knip..."
+npm run knip || exit 1
+
+echo "Running ESLint..."
+npm run lint || exit 1
+
+echo "Running Build..."
+npm run build || exit 1
+
+echo "All checks passed!"
