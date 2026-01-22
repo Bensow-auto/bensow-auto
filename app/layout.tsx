@@ -1,15 +1,10 @@
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter } from "next/font/google"
 import { Navbar, Footer, WhatsAppButton } from "@/components/layout"
 import "./globals.css"
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
-})
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
   subsets: ["latin"],
 })
 
@@ -25,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${inter.variable} ${playfair.variable} antialiased`}>
+      <body className={`${inter.variable} antialiased`}>
         <Navbar />
         <main className="pt-20">{children}</main>
         <Footer />

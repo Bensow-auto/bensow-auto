@@ -1,0 +1,5 @@
+export { Hero } from "./Hero"
+export { ServiceCards } from "./ServiceCards"
+export { Services } from "./Services"
+export { Difference } from "./Difference"
+export { CTA } from "./CTA"

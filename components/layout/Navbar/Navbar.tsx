@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -32,8 +33,14 @@ export function Navbar() {
       <div className={navbarStyles.container}>
         <div className={navbarStyles.inner}>
           {/* Logo */}
-          <Link href="/" className={navbarStyles.logo}>
-            BSA
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/logo2.png"
+              alt="BSA"
+              width={120}
+              height={70}
+              className="h-14 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

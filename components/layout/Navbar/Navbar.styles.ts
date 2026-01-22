@@ -1,6 +1,6 @@
 export const navbarStyles = {
   wrapper: "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-  wrapperScrolled: "bg-secondary/80 backdrop-blur-md border-b border-gray-800",
+  wrapperScrolled: "bg-secondary/80 backdrop-blur-md",
   wrapperTop: "bg-transparent",
   container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
   inner: "flex items-center justify-between h-20",
