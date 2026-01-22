@@ -1,0 +1,272 @@
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { ArrowRight, MessageCircle, Send } from "lucide-react"
+import { Button } from "@/components/ui/Button"
+import { Input } from "@/components/ui/Input"
+import { Select } from "@/components/ui/Select"
+import { Textarea } from "@/components/ui/Textarea"
+import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from "@/styles/animations"
+
+const requestTypes = [
+  { value: "depot-vente", label: "Dépôt & Vente" },
+  { value: "expertise", label: "Expertise automobile" },
+  { value: "commande", label: "Commande personnalisée" },
+  { value: "import", label: "Import Allemagne / Belgique" },
+  { value: "autre", label: "Autre demande" },
+]
+
+export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    setIsSubmitting(false)
+  }
+
+  return (
+    <div className="min-h-screen bg-secondary">
+      {/* Hero Section */}
+      <section className="pt-32 pb-16">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          <motion.p
+            variants={fadeInUp}
+            className="text-gray-500 uppercase tracking-widest text-sm mb-4"
+          >
+            Parlons de votre projet
+          </motion.p>
+          <motion.h1
+            variants={fadeInUp}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
+          >
+            Contactez-<span className="font-light italic">nous</span>
+          </motion.h1>
+          <motion.p
+            variants={fadeInUp}
+            className="text-gray-400 max-w-2xl mx-auto"
+          >
+            Une question, un projet automobile ? Notre équipe est à votre disposition
+            pour vous accompagner dans toutes vos démarches.
+          </motion.p>
+        </motion.div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          >
+            {/* Contact Cards */}
+            <motion.div variants={fadeInLeft} className="lg:col-span-1 space-y-6">
+              {/* WhatsApp Card */}
+              <div className="bg-secondary-light border border-gray-800 rounded-2xl p-6">
+                <div className="w-12 h-12 bg-[#25D366]/10 rounded-xl flex items-center justify-center mb-4">
+                  <MessageCircle size={24} className="text-[#25D366]" />
+                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">
+                  Réponse rapide
+                </h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  Contactez-nous directement sur WhatsApp pour une réponse rapide.
+                </p>
+                <a
+                  href="https://wa.me/33600000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#25D366] hover:underline text-sm font-medium"
+                >
+                  Ouvrir WhatsApp
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+
+              {/* Instagram Card */}
+              <div className="bg-secondary-light border border-gray-800 rounded-2xl p-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#F77737] rounded-xl flex items-center justify-center mb-4">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">
+                  Suivez-nous
+                </h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  Retrouvez nos dernières actualités et véhicules sur Instagram.
+                </p>
+                <a
+                  href="https://instagram.com/bensow_auto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-white hover:underline text-sm font-medium"
+                >
+                  @bensow_auto
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+
+              {/* Location Info */}
+              <div className="bg-secondary-light border border-gray-800 rounded-2xl p-6">
+                <h3 className="text-white font-semibold text-lg mb-4">
+                  Informations
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <p className="text-gray-500">Adresse</p>
+                    <p className="text-gray-300">Sur rendez-vous uniquement</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500">Horaires</p>
+                    <p className="text-gray-300">Lun - Sam : 9h - 19h</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-500">Email</p>
+                    <p className="text-gray-300">contact@bensow-auto.fr</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Contact Form */}
+            <motion.div
+              variants={fadeInRight}
+              className="lg:col-span-2"
+            >
+              <div className="bg-secondary-light border border-gray-800 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  Envoyez-nous un message
+                </h2>
+                <p className="text-gray-400 mb-8">
+                  Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Type de demande */}
+                  <Select
+                    label="Type de demande"
+                    name="type"
+                    options={requestTypes}
+                    placeholder="Sélectionnez le type de demande"
+                    required
+                  />
+
+                  {/* Nom & Prénom */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      label="Nom"
+                      name="nom"
+                      placeholder="Votre nom"
+                      required
+                    />
+                    <Input
+                      label="Prénom"
+                      name="prenom"
+                      placeholder="Votre prénom"
+                      required
+                    />
+                  </div>
+
+                  {/* Email & Téléphone */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      label="Email"
+                      name="email"
+                      type="email"
+                      placeholder="votre@email.com"
+                      required
+                    />
+                    <Input
+                      label="Téléphone"
+                      name="telephone"
+                      type="tel"
+                      placeholder="06 00 00 00 00"
+                      required
+                    />
+                  </div>
+
+                  {/* Message */}
+                  <Textarea
+                    label="Message"
+                    name="message"
+                    placeholder="Décrivez votre projet ou votre demande..."
+                    rows={5}
+                    required
+                  />
+
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="lg"
+                    className="w-full sm:w-auto"
+                    isLoading={isSubmitting}
+                  >
+                    Envoyer le message
+                    <Send size={18} className="ml-2" />
+                  </Button>
+                </form>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 border-t border-gray-800">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          <motion.h2
+            variants={fadeInUp}
+            className="text-3xl sm:text-4xl font-bold text-white mb-6"
+          >
+            Vous cherchez un véhicule précis ?
+          </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="text-gray-400 mb-8"
+          >
+            Découvrez notre service de commande personnalisée et laissez-nous trouver le véhicule de vos rêves.
+          </motion.p>
+          <motion.div variants={fadeInUp}>
+            <Link href="/commande">
+              <Button variant="outline" size="lg">
+                Commande personnalisée
+                <ArrowRight size={18} className="ml-2" />
+              </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+      </section>
+    </div>
+  )
+}

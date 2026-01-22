@@ -12,11 +12,10 @@ import { navbarStyles } from "./Navbar.styles"
 
 const navLinks = [
   { href: "/", label: "Accueil" },
-  { href: "/catalogue", label: "Catalogue" },
+  // { href: "/catalogue", label: "Catalogue" }, // TODO: À activer plus tard
   { href: "/services", label: "Nos Services" },
   { href: "/commande", label: "Commande Personnalisée" },
   { href: "/expertise", label: "Expertise" },
-  { href: "/contact", label: "Contact" },
 ]
 
 export function Navbar() {
