@@ -4,7 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/Button"
 import { useHasScrolled } from "@/composables"
 import { cn } from "@/lib/cn"
@@ -39,6 +38,7 @@ export function Navbar() {
               width={120}
               height={70}
               className="h-14 w-auto"
+              priority
             />
           </Link>
 
@@ -75,35 +75,32 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className={navbarStyles.mobileMenu}
-          >
-            <nav className={navbarStyles.mobileNav}>
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={navbarStyles.mobileNavLink}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button variant="accent" size="sm" className="w-full">
-                  Nous contacter
-                </Button>
-              </Link>
-            </nav>
-          </motion.div>
+      {/* Mobile Menu - CSS Animation */}
+      <div
+        className={cn(
+          navbarStyles.mobileMenu,
+          "transition-all duration-300 ease-in-out overflow-hidden",
+          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         )}
-      </AnimatePresence>
+      >
+        <nav className={navbarStyles.mobileNav}>
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={navbarStyles.mobileNavLink}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <Button variant="accent" size="sm" className="w-full">
+              Nous contacter
+            </Button>
+          </Link>
+        </nav>
+      </div>
     </header>
   )
 }

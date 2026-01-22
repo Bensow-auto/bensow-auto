@@ -1,14 +1,54 @@
 "use client"
 
-import { useState } from "react"
+import { useState, lazy, Suspense } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { ArrowRight, MessageCircle, Send } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { Select } from "@/components/ui/Select"
 import { Textarea } from "@/components/ui/Textarea"
-import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from "@/styles/animations"
+
+// Lazy load motion components
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+)
+const MotionP = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.p),
+  { ssr: false }
+)
+const MotionH1 = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.h1),
+  { ssr: false }
+)
+const MotionH2 = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.h2),
+  { ssr: false }
+)
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+}
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+}
 
 const requestTypes = [
   { value: "depot-vente", label: "Dépôt & Vente" },
@@ -24,7 +64,6 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500))
     setIsSubmitting(false)
   }
@@ -33,46 +72,26 @@ export default function ContactPage() {
     <div className="min-h-screen bg-secondary">
       {/* Hero Section */}
       <section className="pt-32 pb-16">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-        >
-          <motion.p
-            variants={fadeInUp}
-            className="text-gray-500 uppercase tracking-widest text-sm mb-4"
-          >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-gray-500 uppercase tracking-widest text-sm mb-4">
             Parlons de votre projet
-          </motion.p>
-          <motion.h1
-            variants={fadeInUp}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-          >
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
             Contactez-<span className="font-light italic">nous</span>
-          </motion.h1>
-          <motion.p
-            variants={fadeInUp}
-            className="text-gray-400 max-w-2xl mx-auto"
-          >
+          </h1>
+          <p className="text-gray-400 max-w-2xl mx-auto">
             Une question, un projet automobile ? Notre équipe est à votre disposition
             pour vous accompagner dans toutes vos démarches.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
       </section>
 
       {/* Contact Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Contact Cards */}
-            <motion.div variants={fadeInLeft} className="lg:col-span-1 space-y-6">
+            <div className="lg:col-span-1 space-y-6">
               {/* WhatsApp Card */}
               <div className="bg-secondary-light border border-gray-800 rounded-2xl p-6">
                 <div className="w-12 h-12 bg-[#25D366]/10 rounded-xl flex items-center justify-center mb-4">
@@ -85,7 +104,7 @@ export default function ContactPage() {
                   Contactez-nous directement sur WhatsApp pour une réponse rapide.
                 </p>
                 <a
-                  href="https://wa.me/33600000000"
+                  href="https://wa.me/33756987958"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-[#25D366] hover:underline text-sm font-medium"
@@ -120,12 +139,12 @@ export default function ContactPage() {
                   Retrouvez nos dernières actualités et véhicules sur Instagram.
                 </p>
                 <a
-                  href="https://instagram.com/bensow_auto"
+                  href="https://instagram.com/bensowauto"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-white hover:underline text-sm font-medium"
                 >
-                  @bensow_auto
+                  @bensowauto
                   <ArrowRight size={16} />
                 </a>
               </div>
@@ -146,17 +165,14 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-gray-500">Email</p>
-                    <p className="text-gray-300">contact@bensow-auto.fr</p>
+                    <p className="text-gray-300">contact.y@bensowauto.fr</p>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Contact Form */}
-            <motion.div
-              variants={fadeInRight}
-              className="lg:col-span-2"
-            >
+            <div className="lg:col-span-2">
               <div className="bg-secondary-light border border-gray-800 rounded-2xl p-8">
                 <h2 className="text-2xl font-bold text-white mb-2">
                   Envoyez-nous un message
@@ -231,41 +247,27 @@ export default function ContactPage() {
                   </Button>
                 </form>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 border-t border-gray-800">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-        >
-          <motion.h2
-            variants={fadeInUp}
-            className="text-3xl sm:text-4xl font-bold text-white mb-6"
-          >
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             Vous cherchez un véhicule précis ?
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="text-gray-400 mb-8"
-          >
+          </h2>
+          <p className="text-gray-400 mb-8">
             Découvrez notre service de commande personnalisée et laissez-nous trouver le véhicule de vos rêves.
-          </motion.p>
-          <motion.div variants={fadeInUp}>
-            <Link href="/commande">
-              <Button variant="outline" size="lg">
-                Commande personnalisée
-                <ArrowRight size={18} className="ml-2" />
-              </Button>
-            </Link>
-          </motion.div>
-        </motion.div>
+          </p>
+          <Link href="/commande">
+            <Button variant="outline" size="lg">
+              Commande personnalisée
+              <ArrowRight size={18} className="ml-2" />
+            </Button>
+          </Link>
+        </div>
       </section>
     </div>
   )
