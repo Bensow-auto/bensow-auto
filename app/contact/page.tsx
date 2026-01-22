@@ -1,54 +1,12 @@
 "use client"
 
-import { useState, lazy, Suspense } from "react"
-import dynamic from "next/dynamic"
+import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight, MessageCircle, Send } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { Select } from "@/components/ui/Select"
 import { Textarea } from "@/components/ui/Textarea"
-
-// Lazy load motion components
-const MotionDiv = dynamic(
-  () => import("framer-motion").then((mod) => mod.motion.div),
-  { ssr: false }
-)
-const MotionP = dynamic(
-  () => import("framer-motion").then((mod) => mod.motion.p),
-  { ssr: false }
-)
-const MotionH1 = dynamic(
-  () => import("framer-motion").then((mod) => mod.motion.h1),
-  { ssr: false }
-)
-const MotionH2 = dynamic(
-  () => import("framer-motion").then((mod) => mod.motion.h2),
-  { ssr: false }
-)
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-}
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-}
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-}
 
 const requestTypes = [
   { value: "depot-vente", label: "Dépôt & Vente" },
