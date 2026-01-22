@@ -1,6 +1,6 @@
 "use client"
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react"
+import { forwardRef, type HTMLAttributes } from "react"
 import { motion, type HTMLMotionProps } from "framer-motion"
 import { cn } from "@/lib/cn"
 import { cardStyles, type CardVariant, type CardSize } from "./Card.styles"
@@ -17,9 +17,9 @@ interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {
   description?: string
 }
 
-interface CardContentProps extends HTMLAttributes<HTMLDivElement> {}
+type CardContentProps = HTMLAttributes<HTMLDivElement>
 
-interface CardFooterProps extends HTMLAttributes<HTMLDivElement> {}
+type CardFooterProps = HTMLAttributes<HTMLDivElement>
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = "default", size = "md", animated = true, children, ...props }, ref) => {
