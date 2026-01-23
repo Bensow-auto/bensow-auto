@@ -35,9 +35,9 @@ export function Navbar() {
             <Image
               src="/images/logo2.png"
               alt="BSA"
-              width={120}
-              height={70}
-              className="h-14 w-auto"
+              width={160}
+              height={90}
+              className="h-20 w-auto"
               priority
             />
           </Link>

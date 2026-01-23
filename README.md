@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bensow Auto
 
-## Getting Started
+Site vitrine pour **Bensow Auto**, entreprise spécialisée dans les services automobiles : dépôt-vente, expertise, commande personnalisée et import de véhicules.
 
-First, run the development server:
+## Stack Technique
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework** : Next.js 15 (App Router)
+- **Langage** : TypeScript
+- **Styling** : Tailwind CSS 4
+- **Animations** : Framer Motion
+- **Icônes** : Lucide React
+- **Déploiement** : Vercel
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Page d'accueil avec hero, services, avantages |
+| `/services` | Présentation des services (dépôt-vente, expertise, import) |
+| `/expertise` | Page dédiée à l'expertise automobile |
+| `/commande` | Commande personnalisée de véhicules |
+| `/contact` | Formulaire de contact et coordonnées |
+| `/temoignages` | Avis et témoignages clients |
+| `/mentions-legales` | Mentions légales |
+| `/conditions-generales` | Conditions générales d'utilisation |
+
+## Structure du Projet
+
+```
+bensow/
+├── app/                    # Pages (App Router)
+│   ├── page.tsx           # Accueil
+│   ├── services/
+│   ├── expertise/
+│   ├── commande/
+│   ├── contact/
+│   ├── temoignages/
+│   ├── mentions-legales/
+│   └── conditions-generales/
+├── components/
+│   ├── layout/            # Navbar, Footer, WhatsAppButton
+│   ├── ui/                # Button, Card, Input, Select, Textarea
+│   └── sections/          # HeroSection, ServicesSection, etc.
+├── public/
+│   └── images/            # Images et logos
+├── styles/                # Animations globales
+├── lib/                   # Utilitaires (cn)
+└── composables/           # Hooks personnalisés
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Cloner le repo
+git clone https://github.com/Alley-eddine/bensow-auto.git
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Installer les dépendances
+npm install
 
-## Learn More
+# Lancer en développement
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# Build production
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Développement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Serveur de développement
+npm run dev
 
-## Deploy on Vercel
+# Lint
+npm run lint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Build
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Déploiement
+
+Le site est déployé automatiquement sur Vercel à chaque push sur la branche `main`.
+
+---
+
+Développé par Alleycom

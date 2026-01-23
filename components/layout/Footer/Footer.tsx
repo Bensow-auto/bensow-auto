@@ -31,9 +31,9 @@ export function Footer() {
               <Image
                 src="/images/logo1.png"
                 alt="BSA - Bensow Auto"
-                width={80}
-                height={60}
-                className="h-16 w-auto"
+                width={120}
+                height={90}
+                className="h-24 w-auto"
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -167,11 +167,22 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
-            © {currentYear} BENSOW AUTO. Tous droits réservés.
-          </p>
-          <div className="flex items-center gap-4">
-            <span className="text-gray-500 text-sm italic">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="text-gray-500 text-sm">
+              © {currentYear} BENSOW AUTO. Tous droits réservés.
+            </p>
+            <span className="text-gray-600 text-xs">
+              Powered by <span className="text-gray-400">Alleycom</span>
+            </span>
+          </div>
+          <div className="flex items-center gap-6">
+            <Link href="/mentions-legales" className="text-gray-500 hover:text-white transition-colors text-sm">
+              Mentions légales
+            </Link>
+            <Link href="/conditions-generales" className="text-gray-500 hover:text-white transition-colors text-sm">
+              CGU
+            </Link>
+            <span className="text-gray-500 text-sm italic hidden sm:inline">
               Votre projet automobile, maîtrisé.
             </span>
             <Image
