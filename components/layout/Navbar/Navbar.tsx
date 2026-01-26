@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/", label: "Accueil" },
   // { href: "/catalogue", label: "Catalogue" }, // TODO: À activer plus tard
   { href: "/services", label: "Nos Services" },
+  { href: "/depot-vente", label: "Dépôt-Vente" },
   { href: "/commande", label: "Commande Personnalisée" },
   { href: "/expertise", label: "Expertise" },
 ]

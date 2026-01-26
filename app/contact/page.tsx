@@ -2,28 +2,86 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowRight, MessageCircle, Send } from "lucide-react"
+import { motion } from "framer-motion"
+import { ArrowRight, MessageCircle, Send, Check } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { Select } from "@/components/ui/Select"
 import { Textarea } from "@/components/ui/Textarea"
+import { supabase } from "@/lib/supabase"
 
 const requestTypes = [
-  { value: "depot-vente", label: "Dépôt & Vente" },
   { value: "expertise", label: "Expertise automobile" },
   { value: "commande", label: "Commande personnalisée" },
   { value: "import", label: "Import Allemagne / Belgique" },
-  { value: "autre", label: "Autre demande" },
+  { value: "contact", label: "Autre demande" },
 ]
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+
+    const data = {
+      nom: formData.get("nom") as string,
+      prenom: formData.get("prenom") as string,
+      email: formData.get("email") as string,
+      telephone: formData.get("telephone") as string,
+      type_demande: formData.get("type") as string,
+      message: formData.get("message") as string,
+      status: "non_lu" as const,
+      source: "website_contact",
+    }
+
+    try {
+      const { error: supabaseError } = await supabase
+        .from("demandes")
+        .insert([data])
+
+      if (supabaseError) throw supabaseError
+
+      setIsSuccess(true)
+      e.currentTarget.reset()
+    } catch (err) {
+      console.error("Error submitting form:", err)
+      setError("Une erreur est survenue. Veuillez réessayer.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="min-h-screen bg-secondary flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md mx-auto px-4 text-center"
+        >
+          <div className="w-20 h-20 mx-auto mb-6 bg-green-500/10 rounded-full flex items-center justify-center">
+            <Check size={40} className="text-green-500" />
+          </div>
+          <h1 className="text-2xl font-bold text-white mb-4">
+            Message envoyé avec succès !
+          </h1>
+          <p className="text-gray-400 mb-8">
+            Nous avons bien reçu votre message. Notre équipe vous répondra dans les plus brefs délais.
+          </p>
+          <Link href="/">
+            <Button variant="outline">
+              Retour à l&apos;accueil
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
+    )
   }
 
   return (
@@ -123,7 +181,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-gray-500">Email</p>
-                    <p className="text-gray-300">contact.y@bensowauto.fr</p>
+                    <p className="text-gray-300">contact@bensowauto.fr</p>
                   </div>
                 </div>
               </div>
@@ -138,6 +196,12 @@ export default function ContactPage() {
                 <p className="text-gray-400 mb-8">
                   Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.
                 </p>
+
+                {error && (
+                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                    {error}
+                  </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Type de demande */}

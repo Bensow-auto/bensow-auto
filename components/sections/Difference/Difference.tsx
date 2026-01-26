@@ -28,9 +28,9 @@ const features = [
 ]
 
 const stats = [
-  { value: "500+", label: "Véhicules vendus" },
+  { value: "270+", label: "Accompagnements finalisés" },
   { value: "98%", label: "Clients satisfaits" },
-  { value: "15+", label: "Années d'expérience" },
+  { value: "5★", label: "Service 5 étoiles" },
   { value: "24h", label: "Réponse garantie" },
 ]
 

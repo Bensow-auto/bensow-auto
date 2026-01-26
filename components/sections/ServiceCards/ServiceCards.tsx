@@ -10,7 +10,7 @@ const services = [
     icon: Car,
     title: "Dépôt-vente",
     description: "Véhicule sélectionné avec soin",
-    href: "/services#depot-vente",
+    href: "/depot-vente",
   },
   {
     icon: FileCheck,

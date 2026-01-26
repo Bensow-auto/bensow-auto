@@ -12,10 +12,9 @@ const navigationLinks = [
 ]
 
 const serviceLinks = [
-  { href: "/services#depot-vente", label: "Dépôt-vente" },
+  { href: "/depot-vente", label: "Dépôt-vente" },
   { href: "/expertise", label: "Expertise Automobile" },
   { href: "/commande", label: "Commande personnalisée" },
-  { href: "/services#import", label: "Import Allemagne & Belgique" },
 ]
 
 export function Footer() {
@@ -90,45 +89,43 @@ export function Footer() {
               CONTACT
             </h3>
             <div className="flex flex-col gap-4">
-              {/* Email */}
-              <a
-                href="mailto:contact.y@bensowauto.fr"
-                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm"
-              >
+              {/* Emails Card */}
+              <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-full bg-secondary-light border border-gray-700 flex items-center justify-center flex-shrink-0">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                   </svg>
                 </div>
-                contact.y@bensowauto.fr
-              </a>
+                <div className="flex flex-col gap-1">
+                  <a href="mailto:contact@bensowauto.fr" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    contact@bensowauto.fr
+                  </a>
+                  <a href="mailto:contact.y@bensowauto.fr" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    contact.y@bensowauto.fr
+                  </a>
+                </div>
+              </div>
 
-              {/* Phone Y */}
-              <a
-                href="tel:+33756987958"
-                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm"
-              >
+              {/* Phones Card */}
+              <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-full bg-secondary-light border border-gray-700 flex items-center justify-center flex-shrink-0">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                 </div>
-                Y : +33 7 56 98 79 58
-              </a>
-
-              {/* Phone T */}
-              <a
-                href="tel:+33756813428"
-                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm"
-              >
-                <div className="w-10 h-10 rounded-full bg-secondary-light border border-gray-700 flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
+                <div className="flex flex-col gap-1">
+                  <a href="tel:+33756987958" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    +33 7 56 98 79 58
+                  </a>
+                  <a href="tel:+33756813428" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    +33 7 56 81 34 28
+                  </a>
+                  <a href="tel:+33631751255" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    +33 6 31 75 12 55
+                  </a>
                 </div>
-                T : +33 7 56 81 34 28
-              </a>
+              </div>
 
               {/* WhatsApp */}
               <a
@@ -166,32 +163,34 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-500 text-sm">
               © {currentYear} BENSOW AUTO. Tous droits réservés.
             </p>
+            <div className="flex items-center gap-6">
+              <Link href="/mentions-legales" className="text-gray-500 hover:text-white transition-colors text-sm">
+                Mentions légales
+              </Link>
+              <Link href="/conditions-generales" className="text-gray-500 hover:text-white transition-colors text-sm">
+                CGU
+              </Link>
+              <span className="text-gray-500 text-sm italic hidden sm:inline">
+                Votre projet automobile, maîtrisé.
+              </span>
+              <Image
+                src="/images/logo2.png"
+                alt="BSA"
+                width={40}
+                height={30}
+                className="h-8 w-auto opacity-50"
+              />
+            </div>
+          </div>
+          <div className="text-center">
             <span className="text-gray-600 text-xs">
               Powered by <span className="text-gray-400">Alleycom</span>
             </span>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link href="/mentions-legales" className="text-gray-500 hover:text-white transition-colors text-sm">
-              Mentions légales
-            </Link>
-            <Link href="/conditions-generales" className="text-gray-500 hover:text-white transition-colors text-sm">
-              CGU
-            </Link>
-            <span className="text-gray-500 text-sm italic hidden sm:inline">
-              Votre projet automobile, maîtrisé.
-            </span>
-            <Image
-              src="/images/logo2.png"
-              alt="BSA"
-              width={40}
-              height={30}
-              className="h-8 w-auto opacity-50"
-            />
           </div>
         </div>
       </div>

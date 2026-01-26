@@ -11,6 +11,8 @@ import { Select } from "@/components/ui/Select"
 import { Textarea } from "@/components/ui/Textarea"
 import { Card, CardHeader, CardContent } from "@/components/ui/Card"
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from "@/styles/animations"
+import { supabase } from "@/lib/supabase"
+import { carBrands } from "@/data/car-brands"
 
 const steps = [
   {
@@ -61,12 +63,76 @@ const delaiOptions = [
 
 export default function CommandePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+
+    const data = {
+      nom: formData.get("nom") as string,
+      prenom: formData.get("prenom") as string,
+      email: formData.get("email") as string,
+      telephone: formData.get("telephone") as string,
+      type_demande: "commande" as const,
+      marque: formData.get("marque") as string,
+      modele: formData.get("modele") as string,
+      annee_min: parseInt(formData.get("annee_min") as string) || null,
+      km_max: parseInt(formData.get("km_max") as string) || null,
+      budget: formData.get("budget") as string,
+      delai: formData.get("delai") as string,
+      options: formData.get("options") as string,
+      status: "non_lu" as const,
+      source: "website_commande",
+    }
+
+    try {
+      const { error: supabaseError } = await supabase
+        .from("demandes")
+        .insert([data])
+
+      if (supabaseError) throw supabaseError
+
+      setIsSuccess(true)
+      e.currentTarget.reset()
+    } catch (err) {
+      console.error("Error submitting form:", err)
+      setError("Une erreur est survenue. Veuillez réessayer.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="min-h-screen bg-secondary flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md mx-auto px-4 text-center"
+        >
+          <div className="w-20 h-20 mx-auto mb-6 bg-green-500/10 rounded-full flex items-center justify-center">
+            <Check size={40} className="text-green-500" />
+          </div>
+          <h1 className="text-2xl font-bold text-white mb-4">
+            Demande envoyée avec succès !
+          </h1>
+          <p className="text-gray-400 mb-8">
+            Nous avons bien reçu votre demande de commande personnalisée. Notre équipe vous contactera
+            dans les plus brefs délais pour affiner votre recherche.
+          </p>
+          <Link href="/">
+            <Button variant="outline">
+              Retour à l&apos;accueil
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
+    )
   }
 
   return (
@@ -237,16 +303,23 @@ export default function CommandePage() {
             variants={fadeInUp}
             className="bg-secondary-light border border-gray-800 rounded-2xl p-8"
           >
+            {error && (
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Véhicule recherché */}
               <div className="space-y-4">
                 <h3 className="text-white font-semibold text-lg">Véhicule recherché</h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Input
+                  <Select
                     label="Marque"
                     name="marque"
-                    placeholder="ex: BMW, Mercedes, Audi..."
+                    options={carBrands}
+                    placeholder="Sélectionnez la marque"
                     required
                   />
                   <Input

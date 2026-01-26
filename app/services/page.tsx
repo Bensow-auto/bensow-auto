@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, Check, Search, Flag } from "lucide-react"
+import { ArrowRight, Check, Search } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from "@/styles/animations"
 
@@ -129,7 +129,7 @@ export default function ServicesPage() {
                 ))}
               </div>
 
-              <Link href="/contact">
+              <Link href="/depot-vente">
                 <Button variant="outline" size="md">
                   En savoir plus
                   <ArrowRight size={16} className="ml-2" />
@@ -275,21 +275,33 @@ export default function ServicesPage() {
           >
             {/* Content */}
             <motion.div variants={fadeInLeft}>
-              <div className="w-12 h-12 bg-secondary-light border border-gray-700 rounded-lg flex items-center justify-center mb-6">
-                <Flag size={24} className="text-white" />
+              <div className="flex items-center gap-3 mb-6">
+                {/* German Flag */}
+                <div className="w-10 h-7 rounded overflow-hidden shadow-md">
+                  <div className="h-1/3 bg-black" />
+                  <div className="h-1/3 bg-red-600" />
+                  <div className="h-1/3 bg-yellow-400" />
+                </div>
+                {/* Belgian Flag */}
+                <div className="w-10 h-7 rounded overflow-hidden shadow-md flex">
+                  <div className="w-1/3 bg-black" />
+                  <div className="w-1/3 bg-yellow-400" />
+                  <div className="w-1/3 bg-red-600" />
+                </div>
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Import Allemagne <span className="text-gray-500">DE</span> & Belgique <span className="text-gray-500">BE</span>
+                Import Allemagne & Belgique
               </h2>
 
               <p className="text-gray-400 mb-8">
+                Grâce à nos nombreux partenaires commerciaux et notre expérience terrain.
                 Profitez de notre service d&apos;importation depuis l&apos;Allemagne et la Belgique.
                 Nous gérons l&apos;ensemble du processus pour vous offrir les meilleures opportunités
                 du marché européen.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {importFeatures.map((feature, i) => (
                   <div key={i} className="flex items-center gap-3 text-gray-300 text-sm">
                     <Check size={16} className="text-accent flex-shrink-0" />
@@ -297,13 +309,6 @@ export default function ServicesPage() {
                   </div>
                 ))}
               </div>
-
-              <Link href="/contact">
-                <Button variant="outline" size="md">
-                  Demander un import
-                  <ArrowRight size={16} className="ml-2" />
-                </Button>
-              </Link>
             </motion.div>
 
             {/* Image */}
