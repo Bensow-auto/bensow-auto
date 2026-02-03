@@ -11,7 +11,7 @@ import { navbarStyles } from "./Navbar.styles"
 
 const navLinks = [
   { href: "/", label: "Accueil" },
-  // { href: "/catalogue", label: "Catalogue" }, // TODO: À activer plus tard
+  { href: "/catalogue", label: "Catalogue" },
   { href: "/services", label: "Nos Services" },
   { href: "/depot-vente", label: "Dépôt-Vente" },
   { href: "/commande", label: "Commande Personnalisée" },
