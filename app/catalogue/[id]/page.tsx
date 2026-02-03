@@ -56,24 +56,24 @@ export default function VehiculeDetailPage() {
 
   useEffect(() => {
     if (params.id) {
-      fetchVehicule()
+      const fetchData = async () => {
+        const { data } = await supabase
+          .from("vehicules")
+          .select("*")
+          .eq("id", params.id)
+          .eq("status", "publie")
+          .single()
+
+        setVehicule(data as Vehicule)
+        if (data?.photo_principale) {
+          setCurrentPhotoIndex(data.photo_principale)
+        }
+        setLoading(false)
+      }
+
+      fetchData()
     }
   }, [params.id])
-
-  const fetchVehicule = async () => {
-    const { data } = await supabase
-      .from("vehicules")
-      .select("*")
-      .eq("id", params.id)
-      .eq("status", "publie")
-      .single()
-
-    setVehicule(data as Vehicule)
-    if (data?.photo_principale) {
-      setCurrentPhotoIndex(data.photo_principale)
-    }
-    setLoading(false)
-  }
 
   const formatPrice = (price: number) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")

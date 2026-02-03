@@ -33,33 +33,33 @@ export default function CataloguePage() {
   })
 
   useEffect(() => {
-    fetchVehicules()
+    const fetchData = async () => {
+      setLoading(true)
+
+      let query = supabase
+        .from("vehicules")
+        .select("id, marque, modele, annee, kilometrage, prix, energie, boite_vitesse, titre, photos, photo_principale")
+        .eq("status", "publie")
+        .order("created_at", { ascending: false })
+
+      if (filters.marque) {
+        query = query.eq("marque", filters.marque)
+      }
+      if (filters.energie) {
+        query = query.eq("energie", filters.energie)
+      }
+      if (filters.boite_vitesse) {
+        query = query.eq("boite_vitesse", filters.boite_vitesse)
+      }
+
+      const { data } = await query
+
+      setVehicules((data as Vehicule[]) || [])
+      setLoading(false)
+    }
+
+    fetchData()
   }, [filters])
-
-  const fetchVehicules = async () => {
-    setLoading(true)
-
-    let query = supabase
-      .from("vehicules")
-      .select("id, marque, modele, annee, kilometrage, prix, energie, boite_vitesse, titre, photos, photo_principale")
-      .eq("status", "publie")
-      .order("created_at", { ascending: false })
-
-    if (filters.marque) {
-      query = query.eq("marque", filters.marque)
-    }
-    if (filters.energie) {
-      query = query.eq("energie", filters.energie)
-    }
-    if (filters.boite_vitesse) {
-      query = query.eq("boite_vitesse", filters.boite_vitesse)
-    }
-
-    const { data } = await query
-
-    setVehicules((data as Vehicule[]) || [])
-    setLoading(false)
-  }
 
   const formatPrice = (price: number) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
