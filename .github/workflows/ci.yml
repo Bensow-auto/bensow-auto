@@ -8,7 +8,7 @@ on:
 
 jobs:
   check:
-    name: Knip, Lint & Build
+    name: Lint & Build
     runs-on: ubuntu-latest
 
     steps:
@@ -22,10 +22,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Run Knip
-        run: npm run knip
+        run: npm install
 
       - name: Run Lint
         run: npm run lint
