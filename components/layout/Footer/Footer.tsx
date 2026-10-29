@@ -189,7 +189,7 @@ export function Footer() {
           </div>
           <div className="text-center">
             <span className="text-gray-600 text-xs">
-              Powered by <a href="https://alleycom.vercel.app" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-300 transition-colors">Alleycom</a>
+              Powered by <a href="https://alleycom.fr/fr/realisations/bensow-auto" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-300 transition-colors">Alleycom</a>
             </span>
           </div>
         </div>
